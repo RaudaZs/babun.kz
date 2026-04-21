@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Babun.kz — Есіктер, Баспалдақтар, Шпон панельдері</title>
+  <meta name="description" content="Производство дверей, лестниц и шпоновых панелей в Казахстане. 10 лет на рынке." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <span class="logo-icon">🪵</span>
+        <span class="logo-text">BABUN<span>.KZ</span></span>
+      </a>
+      <nav class="header__nav" id="mainNav">
+        <a href="#catalog" data-i18n="nav.catalog">Каталог</a>
+        <a href="#about" data-i18n="nav.about">О нас</a>
+        <a href="#address" data-i18n="nav.address">Контакты</a>
+      </nav>
+      <div class="header__actions">
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="kz" onclick="setLang('kz')">KZ</button>
+          <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+<button class="burger" id="burgerBtn" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#catalog" data-i18n="nav.catalog" onclick="toggleMenu()">Каталог</a>
+      <a href="#about" data-i18n="nav.about" onclick="toggleMenu()">О нас</a>
+      <a href="#address" data-i18n="nav.address" onclick="toggleMenu()">Контакты</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__slider">
+      <div class="hero__slide hero__slide--1"></div>
+      <div class="hero__slide hero__slide--2"></div>
+      <div class="hero__slide hero__slide--3"></div>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__slider-dots">
+      <button class="slider-dot slider-dot--active" onclick="goToSlide(0)"></button>
+      <button class="slider-dot" onclick="goToSlide(1)"></button>
+      <button class="slider-dot" onclick="goToSlide(2)"></button>
+    </div>
+    <div class="container hero__content">
+      <div class="hero__text">
+        <p class="hero__tagline" data-i18n="hero.tagline">10 лет на рынке</p>
+        <h1 class="hero__headline" data-i18n="hero.headline">Двери. Лестницы.<br>Шпон панели.</h1>
+        <p class="hero__sub" data-i18n="hero.sub">Качественные изделия из натурального дерева для вашего дома</p>
+        <div class="hero__btns">
+          <a href="#catalog" class="btn btn--primary" data-i18n="hero.ctaCatalog">Смотреть каталог</a>
+          <a href="https://wa.me/77003038483" target="_blank" class="btn btn--outline" data-i18n="hero.ctaWhatsApp">Написать в WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__wood-card">
+          <div class="wood-ring wood-ring--1"></div>
+          <div class="wood-ring wood-ring--2"></div>
+          <div class="wood-ring wood-ring--3"></div>
+          <span class="wood-year">10+</span>
+          <span class="wood-label" data-i18n="hero.years">лет опыта</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" data-i18n="about.label">Наша компания</p>
+        <h2 class="section-title" data-i18n="about.title">О компании Babun.kz</h2>
+      </div>
+      <div class="about__grid">
+        <div class="about__stats">
+          <div class="stat-card">
+            <span class="stat-num">10+</span>
+            <span class="stat-desc" data-i18n="about.stat1">лет на рынке</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">500+</span>
+            <span class="stat-desc" data-i18n="about.stat2">выполненных проектов</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">3</span>
+            <span class="stat-desc" data-i18n="about.stat3">категории продукции</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">🇰🇿</span>
+            <span class="stat-desc" data-i18n="about.stat4">производство Казахстан</span>
+          </div>
+        </div>
+        <div class="about__text">
+          <p data-i18n="about.body">Компания Babun.kz специализируется на производстве дверей, лестниц и шпоновых панелей из натурального дерева. Мы работаем на рынке более 10 лет и за это время выполнили тысячи проектов для частных домов, квартир и коммерческих объектов.</p>
+          <p data-i18n="about.body2">Каждое изделие изготавливается вручную с особым вниманием к деталям. Мы используем только качественное сырьё и современное оборудование.</p>
+          <a href="https://instagram.com/babun.kz" target="_blank" class="btn btn--primary" data-i18n="about.igBtn">Наши работы в Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="catalog" id="catalog">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" data-i18n="catalog.label">Наша продукция</p>
+        <h2 class="section-title" data-i18n="catalog.title">Каталог</h2>
+        <p class="section-sub" data-i18n="catalog.subtitle">Выберите интересующие товары и отправьте запрос через WhatsApp</p>
+      </div>
+      <div class="catalog__tabs">
+        <button class="tab-btn active" data-cat="doors" onclick="switchTab('doors')">
+          <span data-i18n="catalog.tabs.doors">Двери</span>
+        </button>
+        <button class="tab-btn" data-cat="stairs" onclick="switchTab('stairs')">
+          <span data-i18n="catalog.tabs.stairs">Лестницы</span>
+        </button>
+        <button class="tab-btn" data-cat="veneer" onclick="switchTab('veneer')">
+          <span data-i18n="catalog.tabs.veneer">Шпон панели</span>
+        </button>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram" id="instagram">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Instagram</p>
+        <h2 class="section-title" data-i18n="instagram.title">Наши работы</h2>
+        <p class="section-sub">
+          <a href="https://instagram.com/babun.kz" target="_blank" class="ig-handle">@babun.kz</a>
+        </p>
+      </div>
+      <div class="ig-grid">
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-01.jpg" alt="Есік дизайны" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-02.jpg" alt="Шпон панельдері" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-03.jpg" alt="Баспалдақ" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-04.jpg" alt="Шпон панель жарық" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-05.jpg" alt="Баспалдақ жарықтандыру" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-06.jpg" alt="Ас үй жиһазы" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-07.jpg" alt="Ас үй" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-08.jpg" alt="Ас үй интерьері" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-10.jpg" alt="Баспалдақ және панель" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-11.jpg" alt="Баспалдақ" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item">
+          <img src="images/instagram/ig-12.jpg" alt="Шпон панельдері" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item ig-item--wide">
+          <img src="images/instagram/ig-13.jpg" alt="Ас үй жиһазы" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item ig-item--wide">
+          <img src="images/instagram/ig-14.jpg" alt="Ас үй" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+        <a href="https://instagram.com/babun.kz" target="_blank" class="ig-item ig-item--wide">
+          <img src="images/instagram/ig-15.jpg" alt="Интерьер" loading="lazy">
+          <div class="ig-overlay"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg></div>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:2rem">
+        <a href="https://instagram.com/babun.kz" target="_blank" class="btn btn--primary" data-i18n="instagram.cta">Смотреть все работы</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADDRESS -->
+  <section class="address" id="address">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" data-i18n="address.label">Найдите нас</p>
+        <h2 class="section-title" data-i18n="address.title">Контакты</h2>
+      </div>
+      <div class="address__grid">
+        <div class="address__info">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <p class="contact-label" data-i18n="address.addressLabel">Адрес</p>
+              <p class="contact-val" data-i18n="address.address">г. Шымкент, ул. Шаяхметова, 73/2</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <p class="contact-label" data-i18n="address.phoneLabel">Телефон</p>
+              <a href="tel:+77003038483" class="contact-val">+7 (700) 303-84-83</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💬</span>
+            <div>
+              <p class="contact-label">WhatsApp</p>
+              <a href="https://wa.me/77003038483" target="_blank" class="contact-val">+7 (700) 303-84-83</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div>
+              <p class="contact-label" data-i18n="address.hoursLabel">Режим работы</p>
+              <p class="contact-val" data-i18n="address.hours">Пн–Сб: 9:00 – 18:00</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📸</span>
+            <div>
+              <p class="contact-label">Instagram</p>
+              <a href="https://instagram.com/babun.kz" target="_blank" class="contact-val">@babun.kz</a>
+            </div>
+          </div>
+          <div class="social-btns">
+            <a href="https://wa.me/77003038483" target="_blank" class="btn btn--whatsapp">
+              WhatsApp
+            </a>
+            <a href="https://instagram.com/babun.kz" target="_blank" class="btn btn--instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+        <div class="address__map">
+          <a href="https://go.2gis.com/XPlP2" target="_blank" class="map-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span data-i18n="address.mapBtn">2GIS-те ашу</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo-text footer-logo">BABUN<span>.KZ</span></span>
+        <p data-i18n="footer.tagline">Качество из натурального дерева</p>
+      </div>
+      <div class="footer__links">
+        <a href="#catalog" data-i18n="nav.catalog">Каталог</a>
+        <a href="#about" data-i18n="nav.about">О нас</a>
+        <a href="#address" data-i18n="nav.address">Контакты</a>
+      </div>
+      <div class="footer__socials">
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p data-i18n="footer.rights">© 2024 Babun.kz. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/77003038483" target="_blank" class="wa-float" aria-label="WhatsApp">
+    <span class="wa-float__ring"></span>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- SELECTION BAR -->
+  <div class="selection-bar" id="selectionBar">
+    <span class="selection-bar__count">
+      <span id="selectionCount">0</span>
+      <span data-i18n="catalog.selected"> товар(а) выбрано</span>
+    </span>
+    <button class="btn btn--whatsapp" onclick="sendToWhatsApp()" data-i18n="catalog.send">Отправить в WhatsApp</button>
+    <button class="selection-bar__clear" onclick="clearSelection()" aria-label="Очистить">✕</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
