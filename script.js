@@ -162,6 +162,86 @@ const DOOR_OPTIONS = {
   }
 };
 
+/* ===== STAIR OPTIONS ===== */
+const STAIR_OPTIONS = {
+  material: {
+    labelRu: 'Материал', labelKz: 'Материал',
+    choices: [
+      { ru: 'Дуб',    kz: 'Емен' },
+      { ru: 'Сосна',  kz: 'Қарағай' },
+      { ru: 'Орех',   kz: 'Жаңғақ' },
+      { ru: 'Ясень',  kz: 'Ясень' },
+    ]
+  },
+  shape: {
+    labelRu: 'Форма', labelKz: 'Пішіні',
+    choices: [
+      { ru: 'Прямая',       kz: 'Тік' },
+      { ru: 'Г-образная',   kz: 'Г-тәрізді' },
+      { ru: 'Винтовая',     kz: 'Бұрандалы' },
+      { ru: 'П-образная',   kz: 'П-тәрізді' },
+    ]
+  },
+  railing: {
+    labelRu: 'Перила', labelKz: 'Тұтқа стилі',
+    choices: [
+      { ru: 'Классика',    kz: 'Классикалық' },
+      { ru: 'Металл',      kz: 'Темір' },
+      { ru: 'Стекло',      kz: 'Шыны' },
+      { ru: 'Без перил',   kz: 'Тұтқасыз' },
+    ]
+  },
+  coating: {
+    labelRu: 'Покрытие', labelKz: 'Жабын',
+    choices: [
+      { ru: 'Лак',         kz: 'Лак' },
+      { ru: 'Краска',      kz: 'Бояу' },
+      { ru: 'Масло',       kz: 'Май' },
+      { ru: 'Натуральное', kz: 'Табиғи' },
+    ]
+  }
+};
+
+/* ===== VENEER OPTIONS ===== */
+const VENEER_OPTIONS = {
+  wood: {
+    labelRu: 'Порода дерева', labelKz: 'Ағаш түрі',
+    choices: [
+      { ru: 'Дуб',    kz: 'Емен' },
+      { ru: 'Орех',   kz: 'Жаңғақ' },
+      { ru: 'Ясень',  kz: 'Ясень' },
+      { ru: 'Вишня',  kz: 'Шие' },
+      { ru: 'Сосна',  kz: 'Қарағай' },
+    ]
+  },
+  coating: {
+    labelRu: 'Покрытие', labelKz: 'Жабын',
+    choices: [
+      { ru: 'Лак',         kz: 'Лак' },
+      { ru: 'Масло',       kz: 'Май' },
+      { ru: 'Краска',      kz: 'Бояу' },
+      { ru: 'Натуральное', kz: 'Табиғи' },
+    ]
+  },
+  layout: {
+    labelRu: 'Раскладка', labelKz: 'Орналасу',
+    choices: [
+      { ru: 'Вертикально',   kz: 'Тігінен' },
+      { ru: 'Горизонтально', kz: 'Көлденең' },
+      { ru: 'Диагональ',     kz: 'Диагональ' },
+      { ru: 'Ёлочка',        kz: 'Елочка' },
+    ]
+  },
+  usage: {
+    labelRu: 'Применение', labelKz: 'Қолдану аймағы',
+    choices: [
+      { ru: 'Стена',   kz: 'Қабырға' },
+      { ru: 'Потолок', kz: 'Төбе' },
+      { ru: 'Мебель',  kz: 'Жиһаз' },
+    ]
+  }
+};
+
 /* ===== STATE ===== */
 let currentLang = localStorage.getItem('babun_lang') || 'kz';
 let currentCat = 'doors';
@@ -247,8 +327,9 @@ function openModal(id) {
   document.getElementById('modalName').textContent = name;
 
   const optionsEl = document.getElementById('modalOptions');
-  if (p.cat === 'doors') {
-    optionsEl.innerHTML = Object.entries(DOOR_OPTIONS).map(([key, opt]) => {
+  const optionsData = p.cat === 'doors' ? DOOR_OPTIONS : p.cat === 'stairs' ? STAIR_OPTIONS : p.cat === 'veneer' ? VENEER_OPTIONS : null;
+  if (optionsData) {
+    optionsEl.innerHTML = Object.entries(optionsData).map(([key, opt]) => {
       const label = currentLang === 'kz' ? opt.labelKz : opt.labelRu;
       const chips = opt.choices.map(c => {
         const val = currentLang === 'kz' ? c.kz : c.ru;
@@ -281,8 +362,9 @@ function sendModalToWhatsApp() {
     : `Здравствуйте! Меня интересует следующий товар из каталога Babun.kz:\n• ${name}`;
 
   let details = '';
-  if (modalProduct.cat === 'doors') {
-    const lines = Object.entries(DOOR_OPTIONS).map(([key, opt]) => {
+  const optionsData = modalProduct.cat === 'doors' ? DOOR_OPTIONS : modalProduct.cat === 'stairs' ? STAIR_OPTIONS : null;
+  if (optionsData) {
+    const lines = Object.entries(optionsData).map(([key, opt]) => {
       const label = currentLang === 'kz' ? opt.labelKz : opt.labelRu;
       return modalSelections[key] ? `  - ${label}: ${modalSelections[key]}` : null;
     }).filter(Boolean);
