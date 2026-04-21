@@ -133,10 +133,40 @@ const products = [
   { id: 'ven-12',  cat: 'veneer', nameRu: 'Шпон панель №12', nameKz: 'Шпон панелі №12', img: 'images/catalog/veneer/veneer-12.jpg' },
 ];
 
+/* ===== DOOR OPTIONS ===== */
+const DOOR_OPTIONS = {
+  style: {
+    labelRu: 'Дизайн стиль', labelKz: 'Дизайн стилі',
+    choices: [
+      { ru: 'Классика',    kz: 'Классикалық' },
+      { ru: 'Модерн',      kz: 'Модерн' },
+      { ru: 'Минимализм',  kz: 'Минимализм' },
+    ]
+  },
+  type: {
+    labelRu: 'Тип двери', labelKz: 'Есік түрі',
+    choices: [
+      { ru: 'Межкомнатная', kz: 'Іші' },
+      { ru: 'Входная',      kz: 'Сыртқы' },
+    ]
+  },
+  color: {
+    labelRu: 'Цвет / Покрытие', labelKz: 'Түс / Жабын',
+    choices: [
+      { ru: 'Белый',  kz: 'Ақ' },
+      { ru: 'Венге',  kz: 'Венге' },
+      { ru: 'Орех',   kz: 'Жаңғақ' },
+      { ru: 'Дуб',    kz: 'Емен' },
+      { ru: 'Сосна',  kz: 'Қарағай' },
+    ]
+  }
+};
+
 /* ===== STATE ===== */
 let currentLang = localStorage.getItem('babun_lang') || 'kz';
 let currentCat = 'doors';
-const selectedIds = new Set();
+let modalProduct = null;
+let modalSelections = {};
 
 /* ===== LANGUAGE ===== */
 function setLang(lang) {
@@ -182,16 +212,17 @@ function renderProducts() {
       stairs: currentLang === 'kz' ? 'Баспалдақ' : 'Лестница',
       veneer: currentLang === 'kz' ? 'Шпон панелі' : 'Шпон панель',
     }[p.cat];
-    const isSelected = selectedIds.has(p.id);
     const imgContent = p.img
       ? `<img src="${p.img}" alt="${name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease">`
       : `<div class="product-card__placeholder" style="background:linear-gradient(135deg,${p.color||'#d4a96a'}33,${p.color||'#d4a96a'}66)"><span style="font-size:2.5rem">${p.emoji||'🚪'}</span><span>${catLabel}</span></div>`;
     return `
-      <div class="product-card ${isSelected ? 'selected' : ''}" onclick="toggleProduct('${p.id}')">
+      <div class="product-card" onclick="openModal('${p.id}')">
         <div class="product-card__img">
           ${imgContent}
           <div class="product-card__overlay">
-            <div class="product-card__check">${isSelected ? '✓' : '+'}</div>
+            <div class="product-card__check">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
           </div>
         </div>
         <div class="product-card__info">
@@ -203,39 +234,69 @@ function renderProducts() {
   }).join('');
 }
 
-function toggleProduct(id) {
-  if (selectedIds.has(id)) {
-    selectedIds.delete(id);
+/* ===== MODAL ===== */
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  modalProduct = p;
+  modalSelections = {};
+
+  const name = currentLang === 'kz' ? p.nameKz : p.nameRu;
+  document.getElementById('modalImg').src = p.img || '';
+  document.getElementById('modalImg').alt = name;
+  document.getElementById('modalName').textContent = name;
+
+  const optionsEl = document.getElementById('modalOptions');
+  if (p.cat === 'doors') {
+    optionsEl.innerHTML = Object.entries(DOOR_OPTIONS).map(([key, opt]) => {
+      const label = currentLang === 'kz' ? opt.labelKz : opt.labelRu;
+      const chips = opt.choices.map(c => {
+        const val = currentLang === 'kz' ? c.kz : c.ru;
+        return `<button class="option-chip" onclick="selectOption('${key}', '${val}', this)">${val}</button>`;
+      }).join('');
+      return `<div class="option-group"><p class="option-label">${label}</p><div class="option-chips">${chips}</div></div>`;
+    }).join('');
   } else {
-    selectedIds.add(id);
+    optionsEl.innerHTML = '';
   }
-  updateSelectionBar();
-  renderProducts();
+
+  const sendBtn = document.getElementById('modalSendBtn');
+  sendBtn.textContent = currentLang === 'kz' ? 'WhatsApp-қа жіберу' : 'Отправить в WhatsApp';
+
+  document.getElementById('productModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
-function updateSelectionBar() {
-  const bar = document.getElementById('selectionBar');
-  const countEl = document.getElementById('selectionCount');
-  const count = selectedIds.size;
-  countEl.textContent = count;
-  bar.classList.toggle('visible', count > 0);
+function selectOption(group, value, el) {
+  modalSelections[group] = value;
+  el.closest('.option-chips').querySelectorAll('.option-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
 }
 
-function clearSelection() {
-  selectedIds.clear();
-  updateSelectionBar();
-  renderProducts();
-}
-
-function sendToWhatsApp() {
-  const t = translations[currentLang];
-  const selected = products.filter(p => selectedIds.has(p.id));
-  const lines = selected.map(p => `• ${currentLang === 'kz' ? p.nameKz : p.nameRu}`);
+function sendModalToWhatsApp() {
+  if (!modalProduct) return;
+  const name = currentLang === 'kz' ? modalProduct.nameKz : modalProduct.nameRu;
   const greeting = currentLang === 'kz'
-    ? 'Сәлеметсіз бе! Babun.kz каталогынан мына тауарлар қызықтырды:\n'
-    : 'Здравствуйте! Меня интересуют следующие позиции из каталога Babun.kz:\n';
-  const message = greeting + lines.join('\n') + '\n\nПрошу связаться со мной.';
+    ? `Сәлем! Babun.kz каталогынан мына өнім қызықтырды:\n• ${name}`
+    : `Здравствуйте! Меня интересует следующий товар из каталога Babun.kz:\n• ${name}`;
+
+  let details = '';
+  if (modalProduct.cat === 'doors') {
+    const lines = Object.entries(DOOR_OPTIONS).map(([key, opt]) => {
+      const label = currentLang === 'kz' ? opt.labelKz : opt.labelRu;
+      return modalSelections[key] ? `  - ${label}: ${modalSelections[key]}` : null;
+    }).filter(Boolean);
+    if (lines.length) details = '\n' + lines.join('\n');
+  }
+
+  const footer = currentLang === 'kz' ? '\n\nБайланысыңызды күтемін.' : '\n\nПрошу связаться со мной.';
+  const message = greeting + details + footer;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 /* ===== INIT ===== */
@@ -262,10 +323,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
   renderProducts();
 
-  // Init slider
   const slides = document.querySelectorAll('.hero__slide');
   if (slides.length) {
     slides[0].classList.add('hero__slide--active');
     startSlider();
   }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 });
