@@ -968,14 +968,15 @@ a.contact-val:hover { color: var(--accent); }
 }
 
 @media (max-width: 640px) {
-  .product-modal { padding: 0; align-items: flex-start; }
+  .product-modal { padding: 0; }
   .product-modal__content {
+    position: fixed;
+    inset: 0;
     grid-template-columns: 1fr;
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    max-height: 100dvh;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
     overflow-y: auto;
     border-radius: 0;
   }
