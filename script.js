@@ -299,11 +299,6 @@ function renderProducts() {
       <div class="product-card" onclick="openModal('${p.id}')">
         <div class="product-card__img">
           ${imgContent}
-          <div class="product-card__overlay">
-            <div class="product-card__check">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-          </div>
         </div>
         <div class="product-card__info">
           <p class="product-card__name">${name}</p>
